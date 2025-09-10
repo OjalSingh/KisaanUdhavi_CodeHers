@@ -135,10 +135,6 @@ These results demonstrate the effectiveness of the Smart Crop Recommendation Sys
 
 ## 📷 Screenshots
 
-| Home page | Features | 
-| --------- | --------- |
-| ![Screenshot 2025-03-22 104944](https://github.com/user-attachments/assets/7b3f6f1b-6423-4ee6-ab16-6391846635f5) | ![Screenshot 2025-03-22 105012](https://github.com/user-attachments/assets/58fe884b-2868-4d55-80d9-a3bdf519ece7) |
-
 | Team Members | Contact Us |
 | --------- | --------- |
 | ![Screenshot 2025-03-22 105046](https://github.com/user-attachments/assets/1e15fa2b-afb1-4fa1-b743-a72af6dcd3c1) | ![Screenshot 2025-03-22 105141](https://github.com/user-attachments/assets/f3e6a7ca-9ebd-41c5-88c1-fd6e1f6528e9) |
@@ -146,10 +142,6 @@ These results demonstrate the effectiveness of the Smart Crop Recommendation Sys
 | Crop Recommendation | Plant Disease Identification |
 | --------- | --------- |
 | ![Screenshot 2025-03-22 105516](https://github.com/user-attachments/assets/b1cedad0-48fc-44e6-8595-93e9795519f5) | ![Screenshot 2025-03-22 110018](https://github.com/user-attachments/assets/af7915e4-be3d-4741-bec6-4a2e49054b3a) | 
-
-| Fertilizer Recommendation | Smart Farming Guide |
-| --------- | --------- |
-| ![Screenshot 2025-03-22 105639](https://github.com/user-attachments/assets/0d526603-15c5-443d-9f6c-cab83596cbe0) | ![Screenshot 2025-03-22 110057](https://github.com/user-attachments/assets/d454ef17-287c-4a0b-bee2-a5085d63a8bb) |
 
 | 📲 | 📲 | 📲 | 📲 |
 | -- | -- | -- | -- |
