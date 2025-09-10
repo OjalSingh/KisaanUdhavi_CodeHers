@@ -1,12 +1,12 @@
 <div align="center">
-    <h1>AgriSens : AI-POWERED SMART FARMING ASSISTANT</h1>
+    <h1>KisaanUdhavi: EMPOWERING FARMERS EVERY STEP</h1>
 </div>
 
 <div align="center">
-    <h3>Link : https://agrisens.netlify.app/ </h3>
+    <h3>Link :  </h3>
 </div>
 
-![Screenshot 2025-01-22 210034](https://github.com/user-attachments/assets/5b945e7d-bbb0-4463-b06f-681445e102bd)
+![Screenshot ]
 
 
 ## Overview
