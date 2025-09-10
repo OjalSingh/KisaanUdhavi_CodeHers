@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KisaanUdhavi</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <img src="final logo.png" alt="KisaanUdhavi Logo" class="logo" />
+    <h1>KisaanUdhavi</h1>
+    <p class="tagline">Empowering farmers with A.I</p>
+  </header>
+
+  <!-- Description -->
+  <section class="description">
+    <p>
+      KisaanUdhavi is an AI-powered platform designed to help farmers make 
+      smarter decisions. From detecting crop diseases to checking weather 
+      updates and market prices, our tools empower farmers with timely insights 
+      and support through a smart chatbot assistant.
+    </p>
+  </section>
+
+  <!-- Feature Buttons -->
+  <section class="features" style="text-align:center;">
+    <button onclick="openModal('chatbotModal')">🤖 Chatbot</button>
+    <button onclick="openModal('diseaseModal')">🌱 Disease Detection</button>
+    <button onclick="openModal('weatherModal')">☁️ Weather</button>
+    <button onclick="openModal('pricesModal')">💰 Crop Prices</button>
+  </section>
+
+  <!-- Chatbot Modal -->
+  <div id="chatbotModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('chatbotModal')">&times;</span>
+      <h2>🤖 Chatbot Assistant</h2>
+
+      <!-- Chat area -->
+      <div id="chatBox" class="chat-box"></div>
+
+      <!-- Options -->
+      <div id="chatOptions"></div>
+    </div>
+  </div>
+
+  <!-- Disease Detection Modal -->
+  <div id="diseaseModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('diseaseModal')">&times;</span>
+      <h2>🌱 Disease Detection</h2>
+      <p>Upload images of your crops and let our AI detect potential diseases and offer solutions.</p>
+      <input type="file" id="diseaseImage" accept="image/*" onchange="handleDiseaseImage(event)" />
+      <img id="diseasePreview" class="preview" />
+      <p id="diseaseMessage"></p>
+      <textarea id="diseaseDescription" placeholder="Describe the issue..." rows="3" style="width:100%; margin-top:10px;"></textarea>
+      <button onclick="submitDiseaseForm()">Submit</button>
+    </div>
+  </div>
+
+  <!-- Weather Modal -->
+  <div id="weatherModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('weatherModal')">&times;</span>
+      <h2>☁️ Weather</h2>
+      <p>Get real-time weather updates to plan your farming activities effectively.</p>
+    </div>
+  </div>
+
+  <!-- Crop Prices Modal -->
+  <div id="pricesModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('pricesModal')">&times;</span>
+      <h2>💰 Crop Prices</h2>
+      <p>Access the latest market prices for your crops and sell at the best rates.</p>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'block';
+      if (id === "chatbotModal") startChat();
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function (event) {
+      const modals = document.getElementsByClassName("modal");
+      for (let i = 0; i < modals.length; i++) {
+        if (event.target == modals[i]) {
+          modals[i].style.display = "none";
+        }
+      }
+    };
+
+    // -------- MENU DRIVEN CHATBOT --------
+    const chatbotMenu = [
+      { text: "🌾 Crop Prices", reply: "Please choose a crop:", next: [
+        { text: "Wheat", reply: "Wheat is ₹2500/quintal." },
+        { text: "Rice", reply: "Rice is ₹2800/quintal." },
+        { text: "Sugarcane", reply: "Sugarcane is ₹310/quintal." }
+      ]},
+      { text: "☁ Weather", reply: "Today it’s 32°C, sunny with light winds." },
+      { text: "💡 Help", reply: "I can assist with Crop Prices and Weather updates." }
+    ];
+
+    function startChat() {
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML = "";
+      addMessage("Bot", "Hello! I’m KisaanUdhavi Bot 🌱\nHow can I help you today?", "bot-message");
+      showOptions(chatbotMenu);
+    }
+
+    function addMessage(sender, text, className) {
+      const chatBox = document.getElementById("chatBox");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `chat-message ${className}`;
+      msgDiv.textContent = text;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showOptions(optionList) {
+      const optionsDiv = document.getElementById("chatOptions");
+      optionsDiv.innerHTML = "";
+      optionList.forEach(opt => {
+        let btn = document.createElement("button");
+        btn.innerText = opt.text;
+        btn.onclick = () => {
+          addMessage("You", opt.text, "user-message");
+          if (opt.reply) addMessage("Bot", opt.reply, "bot-message");
+          if (opt.next) showOptions(opt.next);
+          else optionsDiv.innerHTML = "";
+        };
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    // -------- Disease Detection Logic --------
+    function handleDiseaseImage(event) {
+      const file = event.target.files[0];
+      const message = document.getElementById("diseaseMessage");
+      const preview = document.getElementById("diseasePreview");
+
+      if (file && file.size <= 500 * 1024) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+        message.textContent = "Image uploaded successfully!";
+        message.style.color = "green";
+      } else {
+        preview.style.display = "none";
+        message.textContent = "File too large! Please upload under 500 KB.";
+        message.style.color = "red";
+        event.target.value = "";
+      }
+    }
+
+    function submitDiseaseForm() {
+      const desc = document.getElementById("diseaseDescription").value.trim();
+      if (desc === "") {
+        alert("Please enter a description of the crop issue.");
+        return;
+      }
+      alert("Disease report submitted successfully! Our AI will analyze and get back to you.");
+    }
+  </script>
+</body>
+</html>
